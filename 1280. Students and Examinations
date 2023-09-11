@@ -1,0 +1,18 @@
+CREATE TABLE Students
+(student_id INT,
+student_name VARCHAR(20))
+
+CREATE TABLE Subjects(subject_name VARCHAR(20))
+
+CREATE TABLE Examinations
+(student_id INT,
+subject_name VARCHAR(20))
+-- Solution
+SELECT S.student_id,
+	   S.student_name,
+       Sub.subject_name,
+       COUNT(E.subject_name) AS attended_exams
+       FROM Students S CROSS JOIN dbo.Subjects Sub 
+LEFT JOIN Examinations E ON S.student_id = E.student_id
+AND Sub.subject_name = E.subject_name
+GROUP BY S.student_id, sub.subject_name , S.student_name
